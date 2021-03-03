@@ -1,5 +1,6 @@
 const { request } = require('express')
 const express = require('express')
+const { v4: uuidv4 } = require('uuid')
 
 const app = express()
 
@@ -12,8 +13,9 @@ app.get('/api/users', (req, res) => {
 })
 
 app.post('/api/users', (req, res) => {
-  users.push(req.body)
-  res.json(req.body)
+  const newUser = { ...req.body, id: uuidv4() }
+  users.push(newUser)
+  res.json(newUser)
 })
 
 app.get('/api/cards', (req, res) => {
