@@ -1,12 +1,23 @@
+const { request } = require('express')
 const express = require('express')
+
 const app = express()
 
-app.use('/api/users', (req, res) => {
-  res.end('[{"name": "Melissa", "role": "student"}]')
+const users = []
+
+app.use(express.json())
+
+app.get('/api/users', (req, res) => {
+  res.json(users)
 })
 
-app.use('/api/cards', (req, res) => {
-  res.end('[{"title": "First card"}]')
+app.post('/api/users', (req, res) => {
+  users.push(req.body)
+  res.json(req.body)
+})
+
+app.get('/api/cards', (req, res) => {
+  res.json([{ title: 'First card' }])
 })
 
 app.listen(3000, () => {
