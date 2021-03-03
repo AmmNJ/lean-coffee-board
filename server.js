@@ -1,9 +1,12 @@
 const express = require('express')
 const app = express()
 
-app.use((req, res) => {
-  console.log(req.method, req.url)
-  res.end('Hello World')
+app.use('/api/users', (req, res) => {
+  res.end('[{"name": "Melissa", "role": "student"}]')
+})
+
+app.use('/api/cards', (req, res) => {
+  res.end('[{"title": "First card"}]')
 })
 
 app.listen(3000, () => {
